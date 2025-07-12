@@ -1,16 +1,11 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    }
+    { "src": "api/index.js", "use": "@vercel/node" },
+    { "src": "api/fetch.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "^/api$",
-      "methods": ["POST"],
-      "dest": "api/index.js"
-    }
+    { "src": "/api", "dest": "api/index.js" },
+    { "src": "/api/fetch", "dest": "api/fetch.js" }
   ]
 }
