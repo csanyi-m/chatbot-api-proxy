@@ -1,3 +1,5 @@
+import { JSDOM } from "jsdom";
+
 export default async function handler(req, res) {
   // ✅ Engedélyezd a CORS-t
   res.setHeader("Access-Control-Allow-Origin", "https://csanyi-m.github.io");
@@ -23,7 +25,12 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(url);
     const html = await response.text();
-    res.status(200).json({ content: html });
+
+    // 🔧 Csak a látható szöveget adjuk vissza
+    const dom = new JSDOM(html);
+    const textContent = dom.window.document.body.innerText;
+
+    res.status(200).json({ content: textContent });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Nem sikerült letölteni az oldalt' });
