@@ -37,7 +37,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: 'system',
-            content: 'Csak a felhasználó által megadott szöveg alapján válaszolj. Ha a válasz nem szerepel egyértelműen benne, mondd azt: "A megadott forrás nem tartalmazza a kért választ."'
+            content: 'Csak a felhasználó által megadott szöveg alapján válaszolj markdown formátumban. Használj felsorolásokat, kiemeléseket és kódrészeket ha szükséges. Ha a válasz nem szerepel egyértelműen benne, mondd azt: "A megadott forrás nem tartalmazza a kért választ."'
           },
           {
             role: 'user',
