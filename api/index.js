@@ -32,18 +32,18 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4',
+        temperature: 0,
         messages: [
           {
             role: 'system',
-            content: 'Csak a megadott szöveg alapján válaszolj.'
+            content: 'Csak a felhasználó által megadott szöveg alapján válaszolj. Ha a válasz nem szerepel egyértelműen benne, mondd azt: "A megadott forrás nem tartalmazza a kért választ."'
           },
           {
             role: 'user',
             content: prompt
           }
-        ],
-        temperature: 0.7
+        ]
       })
     });
 
