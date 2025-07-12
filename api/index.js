@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Csak POST metódus engedélyezett' });
   }
 
-  const { prompt, password } = req.body;
+  const { prompt, password, model } = req.body;
 
   // Jelszó ellenőrzés
   if (password !== ACCESS_PASSWORD) {
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'gpt-4-turbo',
+        model: model || 'gpt-4-turbo',
         temperature: 0,
         messages: [
           {
@@ -49,7 +49,6 @@ export default async function handler(req, res) {
 
     const data = await completion.json();
 
-    // Válasz vissza a kliensnek
     res.status(200).json({ reply: data.choices?.[0]?.message?.content || 'Nincs válasz.' });
 
   } catch (err) {
